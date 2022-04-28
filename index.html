@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <title>Base64</title>
+</head>
+<body>
+    <style>
+        .slither{
+            color: #156064;
+            transition: all ease .5s;
+            cursor: pointer;
+        }
+
+        a.brandName{
+            font-size: 1.5rem;
+            font-weight: bolder;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        body{
+            background: #F6FFF8 !important;
+        }
+        *{
+            color: #04282A;
+            color: #156064;
+        }
+        a{
+            text-decoration: none;
+        }
+        .border-none{
+            border: 0 !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        .slither{
+            color: #156064;
+            transition: all ease .5s;
+            cursor: pointer;
+        }
+        .slither>span:hover{
+            color: #0d868c;
+            margin: 1px;
+        }
+    </style>
+    <style>
+        /********** Decodeing & Encoding **********/
+        .upload-area{
+            background: #E3F3EA;
+            cursor: pointer;
+            display:  flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items:  center;
+        }
+        .choose{
+            color: #156064;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.5s;
+        }
+        .choose:hover{
+            color: #6b9b81;
+        }
+        .uploading, .error, .success{
+            font-size: 18px;
+            font-weight: 600;
+            display: none;
+        }
+        .uploading{
+            color: #04282A;
+
+        }
+        .success{
+            color: #579979;
+        }
+        .error{
+            color: #C84949;
+        }
+        button{
+            background: #156064;
+            padding: 6px 16px;
+            border-radius: 50px;
+            transition: 0.5s;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #FFF;
+        }
+        /********** Footer **********/
+        .footer{
+            padding-top: 30px;
+            border-top: 2px solid #C1DBCD;
+            text-align: center;
+            height: 60px;
+        }
+        .footer p{
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .card-s{
+            width: 28rem;
+            height: 20rem;
+            background-color: #E3F3EA;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+    </style>
+    <!-- navigation -->
+    <nav style="background-color: #C1DBCD;" class="navbar navbar-expand-lg navbar-light py-3">
+        <div class="container">
+            <a class="slither brandName" target="_blank" href="index.html">
+                <span>C</span><span>o</span><span>d</span><span>e</span>
+                <span>B</span><span>a</span><span>s</span><span>e</span>
+                <span>6</span><span>4</span>
+            </a>
+            <div class="my-3 " id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a style="background-color:#1e6d71; color: white;padding: .125rem .5rem;border-radius: 50px;" target="_blank" href="https://developer.mozilla.org/en-US/docs/Glossary/Base64"> Learn more </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- main -->
+    <style>
+        textarea[spellcheck="false"]{
+            width: 96%;
+            outline: none !important;
+            /* white-space: nowrap !important; */
+            overflow: auto;
+            resize: none;
+            border: none;
+            background-color: transparent;
+        }
+    </style>
+    <div class="container-fluid my-3 d-flex flex-column">
+        <!-- image to base64 -->
+        <div class="w-100 my-5 d-flex flex-column justify-content-center align-items-center">
+            <h1>Image to Base64</h1>
+            <div class="w-100 d-flex flex-wrap justify-content-evenly align-items-center">
+                <form id="droparea-box-1" action="" method="post" class="upload-area card-s">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#156064" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <label class="choose" for="upload-btn">Choose / Drag an Image</label><br>
+                    <!-- When clicking on the label, we can upload a file -->
+                    <input type="file" accept="image/*" id="upload-btn" required="" hidden="">
+                    <!-- Hiding the default upload button -->
+        
+                    <!-- Messages -->
+                    <p class="uploading">Uploading...</p>
+                    <p class="error">Error! Please try again.</p>
+                    <p class="success">Successfully uploaded</p>
+                </form>
+                <div class="card-s">
+                    <textarea id="imageoutput-1" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <div style="display: flex;justify-content: center;align-items: center;">
+                        <button id="copy-1">copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- base64 to image -->
+        <div class="w-100 my-5 d-flex flex-column justify-content-center align-items-center">
+            <h1>Base64 to Image</h1>
+            <div class="w-100 d-flex flex-wrap justify-content-evenly align-items-center">
+                <div class="card-s">
+                    <textarea id="inputtext-one" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <div style="display: flex;justify-content: center;align-items: center;">
+                        <button id="convertimageinputtext">convert</button>
+                    </div>
+                </div>
+                <div class="card-s">
+                    <div spellcheck="false" class="container-fluid d-flex justify-content-center align-items-center" style="height: 95%;">
+                        <img id="imageoutputimage" style="width: 18rem;" src="">
+                    </div>
+                    <div style="display: flex;justify-content: center;align-items: center;">
+                        <button id="downloadImage">download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- horizontal line -->
+        <hr style="border: solid 1px black;">
+        <!-- text to base64 -->
+        <div class="w-100 my-5 d-flex flex-column justify-content-center align-items-center">
+            <h1>Text to Base64</h1>
+            <div class="w-100 d-flex flex-wrap justify-content-evenly align-items-center">
+                <div class="card-s">
+                    <textarea id="textareatextinput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <div style="display: flex;justify-content: center;align-items: center;">
+                        <button id="converttextinput">convert</button>
+                    </div>
+                </div>
+                <div class="card-s">
+                    <textarea id="textareatextoutput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <div style="display: flex;justify-content: center;align-items: center;">
+                        <button id="copytextoutput">copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- base64 to text -->
+        <div class="w-100 my-5 d-flex flex-column justify-content-center align-items-center">
+            <h1>Base64 to Text</h1>
+            <div class="w-100 d-flex flex-wrap justify-content-evenly align-items-center">
+                <div class="card-s">
+                    <textarea id="textareabase64totextinput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <div style="display: flex;justify-content: center;align-items: center;">
+                        <button id="textareabase64totextconvert">convert</button>
+                    </div>
+                </div>
+                <div class="card-s">
+                    <textarea id="textareabase64totextoutput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <div style="display: flex;justify-content: center;align-items: center;">
+                        <button id="textareabase64totextcopy">copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- creator -->
+    <style>
+        .image-one, .image-two{
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+        }
+        .image-one{
+            background-image: url('style/img/adnanscode.jpg');
+        }
+
+        .image-two{
+            background-image: url('style/img/_alaadesigns.jpg');
+        }
+    </style>
+    <div class="my-5 container-fluid d-flex justify-content-center align-items-center flex-column">
+        <h1>Creators of the Website</h1>
+        <div class="d-flex flex-wrap justify-content-evenly align-items-center w-100">
+            <div style="
+                border: 2px solid #E3F3EA;
+                background: #eefaf3;
+                width: 18rem;
+                height: fit-content;
+                border: 2px solid #E3F3EA;
+                border-radius: 10px;
+            " class="my-1 p-2 d-flex flex-column justify-content-center align-items-center">
+                <p>HTML, CSS and Design by Alaa.</p>
+                <div class="container d-flex justify-content-evenly align-items-center">
+                    <div class="image-two"></div>
+                    <div class="d-flex flex-column">
+                        <b>Alaa</b>
+                        <a target="_blank" href="https://www.instagram.com/_alaadesigns/"> @_alaadesigns </a>
+                    </div>
+                </div>
+            </div>
+            <div style="
+                border: 2px solid #E3F3EA;
+                background: #eefaf3;
+                width: 18rem;
+                height: fit-content;
+                border: 2px solid #E3F3EA;
+                border-radius: 10px;
+            " class="my-1 p-2 d-flex flex-column justify-content-center align-items-center">
+                <p>Project Idea and JS by Adnan.</p>
+                <div class="container d-flex justify-content-evenly align-items-center">
+                    <div class="image-one"></div>
+                    <div class="d-flex flex-column">
+                        <b>Adnan</b>
+                        <a target="_blank" href="https://www.instagram.com/adnanscode/"> @adnanscode </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <p> Ⓒ 2022 CODEBASE64. All Rights Reserved </p>
+    </div>
+    <script src="script/filesaver.js"></script>
+    <script src="script/index.js"></script>
+</body>
+</html>
