@@ -116,7 +116,7 @@
     <!-- navigation -->
     <nav style="background-color: #C1DBCD;" class="navbar navbar-expand-lg navbar-light py-3">
         <div class="container">
-            <a class="slither brandName" target="_blank" href="index.html">
+            <a class="slither brandName" href="index.html">
                 <span>C</span><span>o</span><span>d</span><span>e</span>
                 <span>B</span><span>a</span><span>s</span><span>e</span>
                 <span>6</span><span>4</span>
@@ -148,12 +148,14 @@
             <h1>Image to Base64</h1>
             <div class="w-100 d-flex flex-wrap justify-content-evenly align-items-center">
                 <form id="droparea-box-1" action="" method="post" class="upload-area card-s">
+                    <span style="font-weight: bolder;margin: 1rem 0;">Drag & Drop File</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#156064" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="17 8 12 3 7 8"></polyline>
                         <line x1="12" y1="3" x2="12" y2="15"></line>
                     </svg>
-                    <label class="choose" for="upload-btn">Choose / Drag an Image</label><br>
+                    <span style="font-weight: bolder;margin: 1rem 0;">or</span>
+                    <label class="choose" for="upload-btn">Click to chose file</label><br>
                     <!-- When clicking on the label, we can upload a file -->
                     <input type="file" accept="image/*" id="upload-btn" required="" hidden="">
                     <!-- Hiding the default upload button -->
@@ -164,7 +166,7 @@
                     <p class="success">Successfully uploaded</p>
                 </form>
                 <div class="card-s">
-                    <textarea id="imageoutput-1" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <textarea placeholder="Once you upload an image it will be turned into base64 and displayed here." id="imageoutput-1" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
                     <div style="display: flex;justify-content: center;align-items: center;">
                         <button id="copy-1">copy</button>
                     </div>
@@ -176,13 +178,13 @@
             <h1>Base64 to Image</h1>
             <div class="w-100 d-flex flex-wrap justify-content-evenly align-items-center">
                 <div class="card-s">
-                    <textarea id="inputtext-one" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <textarea placeholder="Input base64 string of an image here then click 'convert' button below."  id="inputtext-one" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
                     <div style="display: flex;justify-content: center;align-items: center;">
                         <button id="convertimageinputtext">convert</button>
                     </div>
                 </div>
                 <div class="card-s">
-                    <div spellcheck="false" class="container-fluid d-flex justify-content-center align-items-center" style="height: 95%;">
+                    <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 95%;">
                         <img id="imageoutputimage" style="width: 18rem;" src="">
                     </div>
                     <div style="display: flex;justify-content: center;align-items: center;">
@@ -198,13 +200,13 @@
             <h1>Text to Base64</h1>
             <div class="w-100 d-flex flex-wrap justify-content-evenly align-items-center">
                 <div class="card-s">
-                    <textarea id="textareatextinput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <textarea placeholder="Input text here then click 'convert' button below." id="textareatextinput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
                     <div style="display: flex;justify-content: center;align-items: center;">
                         <button id="converttextinput">convert</button>
                     </div>
                 </div>
                 <div class="card-s">
-                    <textarea id="textareatextoutput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <textarea placeholder="The text will be turned into base64 and displayed here." id="textareatextoutput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
                     <div style="display: flex;justify-content: center;align-items: center;">
                         <button id="copytextoutput">copy</button>
                     </div>
@@ -216,13 +218,13 @@
             <h1>Base64 to Text</h1>
             <div class="w-100 d-flex flex-wrap justify-content-evenly align-items-center">
                 <div class="card-s">
-                    <textarea id="textareabase64totextinput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <textarea placeholder="Input base64 and then click 'convert' button below." id="textareabase64totextinput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
                     <div style="display: flex;justify-content: center;align-items: center;">
                         <button id="textareabase64totextconvert">convert</button>
                     </div>
                 </div>
                 <div class="card-s">
-                    <textarea id="textareabase64totextoutput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
+                    <textarea placeholder="The base64 will be turned into text and displayed here." id="textareabase64totextoutput" spellcheck="false" class="container-fluid" style="outline: none;height: 95%;"></textarea>
                     <div style="display: flex;justify-content: center;align-items: center;">
                         <button id="textareabase64totextcopy">copy</button>
                     </div>
